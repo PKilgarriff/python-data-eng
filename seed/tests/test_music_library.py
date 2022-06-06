@@ -11,10 +11,15 @@ class TestMusicLibrary(unittest.TestCase):
         music_library = MusicLibrary()
         self.assertEqual(music_library.add("Rolling Blackouts by The Go! Team"), None)
 
+    def test_all_returns_array_of_tracks(self):
+        music_library = MusicLibrary()
+        music_library.add("Rolling Blackouts by The Go! Team")
+        self.assertEqual(music_library.all(), ["Rolling Blackouts by The Go! Team"])
+
 
 """
 >> > music_library = MusicLibrary()
->> > music_library.add("Rolling Blackouts by The Go! Team")
+>> > 
 None
 >> > music_library.add("Oh Yeah by Locust")
 None
