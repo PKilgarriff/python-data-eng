@@ -4,6 +4,15 @@ from player.music_library import MusicLibrary
 
 
 class TestMusicLibrary(unittest.TestCase):
+    def adds_tracks(self, library, tracks):
+        """Helper method to add tracks to a music library instance under test
+        :param library: MusicLibrary - instance of a library
+        :param tracks: Array - tracks to be added as strings
+        :returns: None
+        """
+        for track in tracks:
+            library.add(track)
+
     def test_constructs(self):
         MusicLibrary()
 
@@ -13,16 +22,15 @@ class TestMusicLibrary(unittest.TestCase):
 
     def test_all_returns_array_of_tracks(self):
         music_library = MusicLibrary()
-        music_library.add("Rolling Blackouts by The Go! Team")
-        self.assertEqual(music_library.all(), ["Rolling Blackouts by The Go! Team"])
+        expected = ["Rolling Blackouts by The Go! Team"]
+        self.adds_tracks(music_library, expected)
+        self.assertEqual(music_library.all(), expected)
 
     def test_all_returns_multiple_tracks(self):
         music_library = MusicLibrary()
-        music_library.add("Rolling Blackouts by The Go! Team")
-        music_library.add("Oh Yeah by Locust")
-        music_library.add("Sleep on the Wing by Bibio")
         expected = ["Rolling Blackouts by The Go! Team",
                     "Oh Yeah by Locust", "Sleep on the Wing by Bibio"]
+        self.adds_tracks(music_library, expected)
         self.assertEqual(music_library.all(), expected)
 
 
