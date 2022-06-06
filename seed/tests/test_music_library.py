@@ -16,17 +16,17 @@ class TestMusicLibrary(unittest.TestCase):
         music_library.add("Rolling Blackouts by The Go! Team")
         self.assertEqual(music_library.all(), ["Rolling Blackouts by The Go! Team"])
 
+    def test_all_returns_multiple_tracks(self):
+        music_library = MusicLibrary()
+        music_library.add("Rolling Blackouts by The Go! Team")
+        music_library.add("Oh Yeah by Locust")
+        music_library.add("Sleep on the Wing by Bibio")
+        expected = ["Rolling Blackouts by The Go! Team",
+                    "Oh Yeah by Locust", "Sleep on the Wing by Bibio"]
+        self.assertEqual(music_library.all(), expected)
+
 
 """
->> > music_library = MusicLibrary()
->> > 
-None
->> > music_library.add("Oh Yeah by Locust")
-None
->> > music_library.add("Sleep on the Wing by Bibio")
-None
->> > music_library.all()
-["Rolling Blackouts by The Go! Team", "Oh Yeah by Locust", "Sleep on the Wing by Bibio"]
 >> > music_library.remove(1)  # Removes track 1
 True  # Returns True on successful removal
 >> > music_library.remove(20)  # If you remove a track that doesn't exist...
