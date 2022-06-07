@@ -17,7 +17,10 @@ class MusicLibrary:
             return True
 
     def all(self):
-        return self.tracks
+        mapped = []
+        for track in self.tracks:
+            mapped.append(str(track))
+        return mapped
 
 
 @dataclass
@@ -25,6 +28,10 @@ class Track:
     title: str
     artist: str
     file: str
+    track_id: str
 
     def __str__(self):
         return f"{self.title} by {self.artist}"
+
+    def link(self):
+        return str(f"https://open.spotify.com/track/{self.track_id}")
