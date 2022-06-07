@@ -1,3 +1,6 @@
+from dataclasses import dataclass
+
+
 class MusicLibrary:
     def __init__(self):
         self.tracks = []
@@ -15,3 +18,10 @@ class MusicLibrary:
 
     def all(self):
         return self.tracks
+
+
+@dataclass
+class Track:
+    title: str
+    artist: str
+    file: str

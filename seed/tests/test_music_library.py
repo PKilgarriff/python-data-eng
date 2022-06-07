@@ -1,6 +1,6 @@
 import unittest
 
-from player.music_library import MusicLibrary
+from player.music_library import MusicLibrary, Track
 
 
 class TestMusicLibrary(unittest.TestCase):
@@ -50,3 +50,20 @@ class TestMusicLibrary(unittest.TestCase):
         music_library = MusicLibrary()
         self.adds_tracks(music_library, self.DEFAULT_TRACKS)
         self.assertEqual(music_library.remove(20), False)
+
+
+class TestTrack(unittest.TestCase):
+    def test_constructs(self):
+        Track("The Boys of Summer", "DJ Sammy", "summer.mp3")
+
+    def test_title_returns_correct_string(self):
+        track = Track("The Boys of Summer", "DJ Sammy", "summer.mp3")
+        self.assertEqual(track.title, "The Boys of Summer")
+
+    def test_artist_returns_correct_string(self):
+        track = Track("The Boys of Summer", "DJ Sammy", "summer.mp3")
+        self.assertEqual(track.artist, "DJ Sammy")
+
+    def test_file_returns_correct_string(self):
+        track = Track("The Boys of Summer", "DJ Sammy", "summer.mp3")
+        self.assertEqual(track.file, "summer.mp3")
