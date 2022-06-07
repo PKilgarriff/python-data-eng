@@ -17,10 +17,7 @@ class MusicLibrary:
             return True
 
     def all(self):
-        mapped = []
-        for track in self.tracks:
-            mapped.append(str(track))
-        return mapped
+        return self.tracks
 
 
 @dataclass

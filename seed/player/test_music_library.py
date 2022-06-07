@@ -37,19 +37,14 @@ class TestMusicLibrary(unittest.TestCase):
 
     def test_all_returns_multiple_tracks(self):
         music_library = MusicLibrary()
-        expected = [
-            "Never Come Back by Caribou",
-            "Light It Up - Remix by Major Lazer",
-            "Trouble's Coming by Royal Blood"
-        ]
         self.adds_tracks(music_library, self.DEFAULT_TRACKS)
-        self.assertEqual(music_library.all(), expected)
+        self.assertEqual(music_library.all(), self.DEFAULT_TRACKS)
 
     def test_removes_a_single_track_by_index(self):
         music_library = MusicLibrary()
         expected = [
-            "Never Come Back by Caribou",
-            "Trouble's Coming by Royal Blood"
+            self.DEFAULT_TRACKS[0],
+            self.DEFAULT_TRACKS[2],
         ]
         self.adds_tracks(music_library, self.DEFAULT_TRACKS)
         music_library.remove(1)
