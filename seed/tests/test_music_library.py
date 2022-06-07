@@ -67,3 +67,7 @@ class TestTrack(unittest.TestCase):
     def test_file_returns_correct_string(self):
         track = Track("The Boys of Summer", "DJ Sammy", "summer.mp3")
         self.assertEqual(track.file, "summer.mp3")
+
+    def test_user_friendly_string_representation(self):
+        track = Track("The Boys of Summer", "DJ Sammy", "summer.mp3")
+        self.assertEqual(str(track), "The Boys of Summer by DJ Sammy")
