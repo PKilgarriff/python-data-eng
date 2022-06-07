@@ -54,13 +54,3 @@ class TestMusicLibrary(unittest.TestCase):
         input = ["Rolling Blackouts by The Go! Team"]
         self.adds_tracks(music_library, input)
         self.assertEqual(music_library.remove(20), False)
-
-
-"""
->> > 
-True  # Returns True on successful removal
->> > music_library.remove(20)  # If you remove a track that doesn't exist...
-False  # It should return False
->> > music_library.all()
-["Rolling Blackouts by The Go! Team", "Sleep on the Wing by Bibio"]
-"""
