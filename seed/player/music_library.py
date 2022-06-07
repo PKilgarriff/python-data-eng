@@ -28,7 +28,7 @@ class Track:
     title: str
     artist: str
     file: str
-    track_id: str
+    track_id: str = "4uLU6hMCjMI75M1A2tKUQC"
 
     def __str__(self):
         return f"{self.title} by {self.artist}"
