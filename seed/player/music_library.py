@@ -5,9 +5,13 @@ class MusicLibrary:
     def add(self, music_track):
         self.tracks.append(music_track)
 
-    def remove(self, track_position):
-        track_index = track_position - 1
-        self.tracks.pop(track_index)
+    def remove(self, track_index):
+        try:
+            self.tracks.pop(track_index)
+        except:
+            return False
+        else:
+            return True
 
     def all(self):
         return self.tracks
