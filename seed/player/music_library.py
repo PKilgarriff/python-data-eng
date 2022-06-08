@@ -16,6 +16,9 @@ class MusicLibrary:
         else:
             return True
 
+    def search(self, function):
+        return list(filter(function, self.tracks))
+
     def all(self):
         return self.tracks
 

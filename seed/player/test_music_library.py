@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import Mock
 
 from player.music_library import MusicLibrary, Track
 
@@ -59,6 +60,34 @@ class TestMusicLibrary(unittest.TestCase):
         music_library = MusicLibrary()
         self.adds_tracks(music_library, self.DEFAULT_TRACKS)
         self.assertEqual(music_library.remove(20), False)
+
+    def test_searches_by_title(self):
+        music_library = MusicLibrary()
+        def mock_lambda(track): return "light" in track.title.lower()
+        self.adds_tracks(music_library, self.DEFAULT_TRACKS)
+        music_library.search(mock_lambda)
+        self.assertEqual(music_library.search(mock_lambda), [self.DEFAULT_TRACKS[1]])
+
+    def test_searches_by_artist(self):
+        music_library = MusicLibrary()
+        def mock_lambda(track): return "caribou" in track.artist.lower()
+        self.adds_tracks(music_library, self.DEFAULT_TRACKS)
+        music_library.search(mock_lambda)
+        self.assertEqual(music_library.search(mock_lambda), [self.DEFAULT_TRACKS[0]])
+
+    def test_searches_by_file(self):
+        music_library = MusicLibrary()
+        def mock_lambda(track): return "troubles_coming" in track.file.lower()
+        self.adds_tracks(music_library, self.DEFAULT_TRACKS)
+        music_library.search(mock_lambda)
+        self.assertEqual(music_library.search(mock_lambda), [self.DEFAULT_TRACKS[2]])
+
+    def test_search_can_return_multiple_results(self):
+        music_library = MusicLibrary()
+        def mock_lambda(track): return "mp3" in track.file.lower()
+        self.adds_tracks(music_library, self.DEFAULT_TRACKS)
+        music_library.search(mock_lambda)
+        self.assertEqual(music_library.search(mock_lambda), self.DEFAULT_TRACKS)
 
 
 class TestTrack(unittest.TestCase):
