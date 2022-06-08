@@ -17,7 +17,7 @@ class MusicLibrary:
             return True
 
     def search(self, function):
-        return list(filter(function, self.tracks))
+        return [track for track in self.tracks if function(track)]
 
     def all(self):
         return self.tracks
