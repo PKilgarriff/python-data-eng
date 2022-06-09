@@ -5,12 +5,14 @@ from storage.csv_storage import MusicCSVStorage
 
 
 class TestMusicPlayer(unittest.TestCase):
+    DIRECTORY_PATH = "/Users/paul/Projects/Makers/bridge_week_01/phase_2/python-data-engineering-challenges/seed/storage/"
+
     def test_constructs(self):
-        mock_csv = "/Users/paul/Projects/Makers/bridge_week_01/phase_2/python-data-engineering-challenges/seed/storage/test_tracks.csv"
+        mock_csv = f"{self.DIRECTORY_PATH}test_tracks.csv"
         MusicCSVStorage(mock_csv)
 
     def test_open_library(self):
-        mock_csv = "/Users/paul/Projects/Makers/bridge_week_01/phase_2/python-data-engineering-challenges/seed/storage/test_tracks.csv"
+        mock_csv = f"{self.DIRECTORY_PATH}test_tracks.csv"
         storage = MusicCSVStorage(mock_csv)
         storage.open_library()
         expected = [
@@ -24,7 +26,7 @@ class TestMusicPlayer(unittest.TestCase):
         self.assertEqual(storage.tracks, expected)
 
     def test_add(self):
-        mock_csv = "/Users/paul/Projects/Makers/bridge_week_01/phase_2/python-data-engineering-challenges/seed/storage/test_tracks.csv"
+        mock_csv = f"{self.DIRECTORY_PATH}test_tracks.csv"
         storage = MusicCSVStorage(mock_csv)
         added_track = Track("Inspector Norse", "Todd Terje",
                             "ins_norse.mp3", "2pucDx5Wyz9uHCou4wntHa")
@@ -43,7 +45,7 @@ class TestMusicPlayer(unittest.TestCase):
         self.assertEqual(storage.tracks, expected)
 
     def test_add(self):
-        mock_csv = "/Users/paul/Projects/Makers/bridge_week_01/phase_2/python-data-engineering-challenges/seed/storage/test_tracks.csv"
+        mock_csv = f"{self.DIRECTORY_PATH}test_tracks.csv"
         storage = MusicCSVStorage(mock_csv)
         added_track = Track("Inspector Norse", "Todd Terje",
                             "ins_norse.mp3", "2pucDx5Wyz9uHCou4wntHa")
@@ -62,8 +64,7 @@ class TestMusicPlayer(unittest.TestCase):
         self.assertEqual(storage.tracks, expected)
 
     def test_save_library(self):
-        # create a music library pointing to another test file
-        mock_csv = "/Users/paul/Projects/Makers/bridge_week_01/phase_2/python-data-engineering-challenges/seed/storage/test_writing_tracks.csv"
+        mock_csv = f"{self.DIRECTORY_PATH}test_writing_tracks.csv"
         storage = MusicCSVStorage(mock_csv)
         added_track = Track("Inspector Norse", "Todd Terje",
                             "ins_norse.mp3", "2pucDx5Wyz9uHCou4wntHa")
