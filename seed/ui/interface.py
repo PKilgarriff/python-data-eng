@@ -132,6 +132,9 @@ class ConsoleIO:
 
 
 class Searchers:
+    # def by_term_case_insensitive(search_term, search_field):
+    #     return lambda track: search_term.lower() in track[search_field].lower()
+
     def by_title_case_insensitive(search_term):
         return lambda track: search_term.lower() in track.title.lower()
 
