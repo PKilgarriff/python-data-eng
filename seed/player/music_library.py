@@ -1,9 +1,19 @@
 from dataclasses import dataclass
 
+from storage.csv_storage import MusicCSVStorage
+
 
 class MusicLibrary:
-    def __init__(self):
+    def __init__(self, storage=MusicCSVStorage):
         self.tracks = []
+        self.storage = storage
+        self.import_library()
+
+    def import_library(self):
+        self.tracks = self.storage.open_library(Track)
+
+    def export_library(self):
+        self.storage.save_library(self.tracks)
 
     def add(self, music_track):
         self.tracks.append(music_track)
@@ -13,8 +23,7 @@ class MusicLibrary:
             self.tracks.pop(track_index)
         except:
             return False
-        else:
-            return True
+        return True
 
     def search(self, function):
         return [track for track in self.tracks if function(track)]
