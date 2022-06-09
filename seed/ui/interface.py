@@ -145,6 +145,6 @@ class Searchers:
         return lambda track: search_term.lower() in track.file.lower()
 
     def by_any_field_case_insensitive(search_term):
-        return lambda track: (search_term in track.title.lower() or
-                              search_term in track.artist.lower() or
-                              search_term in track.file.lower())
+        return lambda track: (search_term.lower() in track.title.lower() or
+                              search_term.lower() in track.artist.lower() or
+                              search_term.lower() in track.file.lower())
