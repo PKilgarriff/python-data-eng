@@ -8,6 +8,7 @@ class TestConsoleRunner(unittest.TestCase):
         PrintLine("Enter:"),
         PrintLine("  a: to add a track"),
         PrintLine("  p: to play a track"),
+        PrintLine("  o: to open Spotify for a track"),
         PrintLine("  d: to delete a track"),
         PrintLine("  l: to list your tracks"),
         PrintLine("  s: to search your tracks"),
@@ -66,6 +67,32 @@ class TestConsoleRunner(unittest.TestCase):
         self.assertEqual(
             mock_subprocess.args,
             ["afplay", "data/tunes/myfav.wav"],
+            "Subprocess wasn't called properly to play the file.",
+        )
+        self.assertTrue(testing_console_io.is_done())
+
+    def test_streams_tracks(self):
+        testing_console_io = TestingConsoleIO(
+            *self.INTRO,
+            InputLine("What do you pick? ", "a"),
+            InputLine("What's the title? ", "Major's Titling Victory"),
+            InputLine("What's the artist? ", "The Cribs"),
+            InputLine("What's the file? ", "data/tunes/myfav.wav"),
+            PrintLine("Added successfully."),
+            *self.OPTIONS,
+            InputLine("What do you pick? ", "o"),
+            PrintLine("1. Major's Titling Victory by The Cribs @ data/tunes/myfav.wav"),
+            InputLine("Which do you want to stream? ", "1"),
+            PrintLine("Streaming Major's Titling Victory by The Cribs..."),
+            PrintLine("Done."),
+            *self.QUIT,
+        )
+        mock_subprocess = MockSubprocess()
+        interface = Interface(testing_console_io, mock_subprocess)
+        interface.run()
+        self.assertEqual(
+            mock_subprocess.args,
+            ["open", "https://open.spotify.com/track/4uLU6hMCjMI75M1A2tKUQC"],
             "Subprocess wasn't called properly to play the file.",
         )
         self.assertTrue(testing_console_io.is_done())

@@ -20,6 +20,8 @@ class Interface:
                 self._add_track()
             elif choice == "p":
                 self._play_track()
+            elif choice == "o":
+                self._stream_track()
             elif choice == "d":
                 self._remove_track()
             elif choice == "l":
