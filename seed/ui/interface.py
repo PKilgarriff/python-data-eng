@@ -35,6 +35,7 @@ class Interface:
         self.console.print("Enter:")
         self.console.print("  a: to add a track")
         self.console.print("  p: to play a track")
+        self.console.print("  o: to open Spotify for a track")
         self.console.print("  d: to delete a track")
         self.console.print("  l: to list your tracks")
         self.console.print("  s: to search your tracks")
@@ -96,6 +97,18 @@ class Interface:
             track = tracks[track_id]
             self.console.print(f"Playing {track.title} by {track.artist}...")
             self.music_player.play(track.file)
+            self.console.print("Done.")
+        else:
+            self.console.print("No such track.")
+
+    def _stream_track(self):
+        self._list_tracks(self.music_library.all())
+        track_id = int(self.console.input("Which do you want to stream? ")) - 1
+        tracks = self.music_library.all()
+        if track_id >= 0 and track_id < len(tracks):
+            track = tracks[track_id]
+            self.console.print(f"Streaming {track.title} by {track.artist}...")
+            self.music_player.stream(track.link())
             self.console.print("Done.")
         else:
             self.console.print("No such track.")
