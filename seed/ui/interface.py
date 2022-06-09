@@ -67,25 +67,22 @@ class Interface:
         search = self.console.input("What do you want to search for? ").lower()
         if choice == "t":
             found = self.music_library.search(
-                lambda track: search in track.title.lower()
+                Searchers.by_title_case_insensitive(search)
             )
             self._list_tracks(found)
         elif choice == "a":
             found = self.music_library.search(
-                lambda track: search in track.artist.lower()
+                Searchers.by_artist_case_insensitive(search)
             )
             self._list_tracks(found)
         elif choice == "f":
             found = self.music_library.search(
-                lambda track: search in track.file.lower()
+                Searchers.by_file_case_insensitive(search)
             )
             self._list_tracks(found)
         elif choice == "*":
             found = self.music_library.search(
-                lambda track:
-                search in track.title.lower() or
-                search in track.artist.lower() or
-                search in track.file.lower()
+                Searchers.by_any_field_case_insensitive(search)
             )
             self._list_tracks(found)
         else:
@@ -132,3 +129,19 @@ class ConsoleIO:
         if prompt is None:
             return input()
         return input(prompt)
+
+
+class Searchers:
+    def by_title_case_insensitive(search_term):
+        return lambda track: search_term.lower() in track.title.lower()
+
+    def by_artist_case_insensitive(search_term):
+        return lambda track: search_term.lower() in track.artist.lower()
+
+    def by_file_case_insensitive(search_term):
+        return lambda track: search_term.lower() in track.file.lower()
+
+    def by_any_field_case_insensitive(search_term):
+        return lambda track: (search_term in track.title.lower() or
+                              search_term in track.artist.lower() or
+                              search_term in track.file.lower())

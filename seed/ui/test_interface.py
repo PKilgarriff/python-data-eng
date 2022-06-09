@@ -90,9 +90,10 @@ class TestConsoleRunner(unittest.TestCase):
         mock_subprocess = MockSubprocess()
         interface = Interface(testing_console_io, mock_subprocess)
         interface.run()
+        DEFAULT_SPOTIFY_LINK = "4uLU6hMCjMI75M1A2tKUQC"
         self.assertEqual(
             mock_subprocess.args,
-            ["open", "https://open.spotify.com/track/4uLU6hMCjMI75M1A2tKUQC"],
+            ["open", f"https://open.spotify.com/track/{DEFAULT_SPOTIFY_LINK}"],
             "Subprocess wasn't called properly to play the file.",
         )
         self.assertTrue(testing_console_io.is_done())
