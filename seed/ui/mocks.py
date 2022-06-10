@@ -81,3 +81,12 @@ class MockSubprocess:
     def call(self, args):
         self.called = True
         self.args = args
+
+
+class MockStorage:
+    def __init__(self):
+        self.called = False
+        self.args = None
+
+    def open_library(args):
+        return []

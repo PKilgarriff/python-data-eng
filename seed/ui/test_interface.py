@@ -1,6 +1,6 @@
 import unittest
 from ui.interface import Interface
-from ui.mocks import PrintLine, InputLine, TestingConsoleIO, MockSubprocess
+from ui.mocks import PrintLine, InputLine, TestingConsoleIO, MockSubprocess, MockStorage
 
 
 class TestConsoleRunner(unittest.TestCase):
@@ -41,7 +41,7 @@ class TestConsoleRunner(unittest.TestCase):
             PrintLine("1. Major's Titling Victory by The Cribs @ file1.mp3"),
             *self.QUIT,
         )
-        interface = Interface(testing_console_io, MockSubprocess())
+        interface = Interface(testing_console_io, MockStorage, MockSubprocess())
         interface.run()
         self.assertTrue(testing_console_io.is_done())
 
@@ -62,7 +62,7 @@ class TestConsoleRunner(unittest.TestCase):
             *self.QUIT,
         )
         mock_subprocess = MockSubprocess()
-        interface = Interface(testing_console_io, mock_subprocess)
+        interface = Interface(testing_console_io, MockStorage, mock_subprocess)
         interface.run()
         self.assertEqual(
             mock_subprocess.args,
@@ -88,7 +88,7 @@ class TestConsoleRunner(unittest.TestCase):
             *self.QUIT,
         )
         mock_subprocess = MockSubprocess()
-        interface = Interface(testing_console_io, mock_subprocess)
+        interface = Interface(testing_console_io, MockStorage, mock_subprocess)
         interface.run()
         DEFAULT_SPOTIFY_LINK = "4uLU6hMCjMI75M1A2tKUQC"
         self.assertEqual(
@@ -140,7 +140,7 @@ class TestConsoleRunner(unittest.TestCase):
             InputLine("What do you want to search for? ", "xx"),
             *self.QUIT,
         )
-        interface = Interface(testing_console_io, MockSubprocess())
+        interface = Interface(testing_console_io, MockStorage, MockSubprocess())
         interface.run()
         self.assertTrue(testing_console_io.is_done())
 
@@ -174,7 +174,7 @@ class TestConsoleRunner(unittest.TestCase):
             PrintLine("1. Be Safe (feat. Lee Ranaldo) by The Cribs @ file2.mp3"),
             *self.QUIT,
         )
-        interface = Interface(testing_console_io, MockSubprocess())
+        interface = Interface(testing_console_io, MockStorage, MockSubprocess())
         interface.run()
         self.assertTrue(testing_console_io.is_done())
 
@@ -185,6 +185,6 @@ class TestConsoleRunner(unittest.TestCase):
             PrintLine("No such command! Try again."),
             *self.QUIT,
         )
-        interface = Interface(testing_console_io, MockSubprocess())
+        interface = Interface(testing_console_io, MockStorage, MockSubprocess())
         interface.run()
         self.assertTrue(testing_console_io.is_done())

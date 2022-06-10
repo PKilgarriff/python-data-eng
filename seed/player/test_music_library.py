@@ -23,26 +23,31 @@ class TestMusicLibrary(unittest.TestCase):
         for track in tracks:
             library.add(track)
 
+    def setUp(self):
+        self.mock_storage = Mock()
+        attrs = {'open_library.return_value': []}
+        self.mock_storage.configure_mock(**attrs)
+
     def test_constructs(self):
-        MusicLibrary()
+        MusicLibrary(self.mock_storage)
 
     def test_add_does_not_throw_an_error(self):
-        music_library = MusicLibrary()
+        music_library = MusicLibrary(self.mock_storage)
         self.assertEqual(music_library.add("Rolling Blackouts by The Go! Team"), None)
 
     def test_all_returns_array_of_tracks(self):
-        music_library = MusicLibrary()
+        music_library = MusicLibrary(self.mock_storage)
         expected = ["Rolling Blackouts by The Go! Team"]
         self.adds_tracks(music_library, expected)
         self.assertEqual(music_library.all(), expected)
 
     def test_all_returns_multiple_tracks(self):
-        music_library = MusicLibrary()
+        music_library = MusicLibrary(self.mock_storage)
         self.adds_tracks(music_library, self.DEFAULT_TRACKS)
         self.assertEqual(music_library.all(), self.DEFAULT_TRACKS)
 
     def test_removes_a_single_track_by_index(self):
-        music_library = MusicLibrary()
+        music_library = MusicLibrary(self.mock_storage)
         expected = [
             self.DEFAULT_TRACKS[0],
             self.DEFAULT_TRACKS[2],
@@ -52,38 +57,38 @@ class TestMusicLibrary(unittest.TestCase):
         self.assertEqual(music_library.all(), expected)
 
     def test_remove_returns_true_on_success(self):
-        music_library = MusicLibrary()
+        music_library = MusicLibrary(self.mock_storage)
         self.adds_tracks(music_library, self.DEFAULT_TRACKS)
         self.assertEqual(music_library.remove(1), True)
 
     def test_remove_returns_false_on_failure(self):
-        music_library = MusicLibrary()
+        music_library = MusicLibrary(self.mock_storage)
         self.adds_tracks(music_library, self.DEFAULT_TRACKS)
         self.assertEqual(music_library.remove(20), False)
 
     def test_searches_by_title(self):
-        music_library = MusicLibrary()
+        music_library = MusicLibrary(self.mock_storage)
         def mock_lambda(track): return "light" in track.title.lower()
         self.adds_tracks(music_library, self.DEFAULT_TRACKS)
         music_library.search(mock_lambda)
         self.assertEqual(music_library.search(mock_lambda), [self.DEFAULT_TRACKS[1]])
 
     def test_searches_by_artist(self):
-        music_library = MusicLibrary()
+        music_library = MusicLibrary(self.mock_storage)
         def mock_lambda(track): return "caribou" in track.artist.lower()
         self.adds_tracks(music_library, self.DEFAULT_TRACKS)
         music_library.search(mock_lambda)
         self.assertEqual(music_library.search(mock_lambda), [self.DEFAULT_TRACKS[0]])
 
     def test_searches_by_file(self):
-        music_library = MusicLibrary()
+        music_library = MusicLibrary(self.mock_storage)
         def mock_lambda(track): return "troubles_coming" in track.file.lower()
         self.adds_tracks(music_library, self.DEFAULT_TRACKS)
         music_library.search(mock_lambda)
         self.assertEqual(music_library.search(mock_lambda), [self.DEFAULT_TRACKS[2]])
 
     def test_search_can_return_multiple_results(self):
-        music_library = MusicLibrary()
+        music_library = MusicLibrary(self.mock_storage)
         def mock_lambda(track): return "mp3" in track.file.lower()
         self.adds_tracks(music_library, self.DEFAULT_TRACKS)
         music_library.search(mock_lambda)

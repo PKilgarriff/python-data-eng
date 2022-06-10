@@ -7,9 +7,9 @@ from player.music_player import MusicPlayer
 
 
 class Interface:
-    def __init__(self, console, subprocess):
+    def __init__(self, console, storage, subprocess):
         self.console = console
-        self.music_library = MusicLibrary()
+        self.music_library = MusicLibrary(storage)
         self.music_player = MusicPlayer(subprocess)
 
     def run(self):
