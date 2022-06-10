@@ -94,7 +94,9 @@ class Interface:
             self.console.print("No such field!")
 
     def _summarise_tracks(self):
-        self.console.print("1. The Cribs: 2 tracks")
+        summary = self.music_library.summarise_library()
+        for index, (artist, track_count) in enumerate(summary.items()):
+            self.console.print(f"{index + 1}. {artist}: {track_count} tracks")
 
 # TODO Extract the shared logic from the _play_track and _stream_track methods
     def _play_track(self):

@@ -5,7 +5,7 @@ from player.music_library import Track
 from storage.csv_storage import MusicCSVStorage
 
 
-class TestMusicPlayer(unittest.TestCase):
+class TestMusicCSVStorage(unittest.TestCase):
     DIRECTORY_PATH = "/Users/paul/Projects/Makers/bridge_week_01/phase_2/python-data-engineering-challenges/seed/storage/"
 
     def setUp(self):
