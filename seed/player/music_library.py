@@ -15,10 +15,12 @@ class MusicLibrary:
     def export_library(self):
         self.storage.save_library(self.tracks)
 
-    def _sort_dict(self, dict):
+    def _sort_dict(self, dict, limit=15):
         sorted_dict = {}
         sorted_keys = sorted(dict, key=dict.get, reverse=True)
-        for key in sorted_keys:
+        for index, key in enumerate(sorted_keys):
+            if index == limit:
+                break
             sorted_dict[key] = dict[key]
         return sorted_dict
 
