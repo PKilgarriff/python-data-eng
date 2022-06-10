@@ -66,6 +66,16 @@ class TestMusicLibrary(unittest.TestCase):
         self.adds_tracks(music_library, self.DEFAULT_TRACKS)
         self.assertEqual(music_library.remove(20), False)
 
+    def test_summarise_library(self):
+        music_library = MusicLibrary(self.mock_storage)
+        self.adds_tracks(music_library, self.DEFAULT_TRACKS)
+        expected = {
+            "Caribou": 1,
+            "Major Lazer": 1,
+            "Royal Blood": 1,
+        }
+        self.assertEqual(music_library.summarise_library(), expected)
+
     def test_searches_by_title(self):
         music_library = MusicLibrary(self.mock_storage)
         def mock_lambda(track): return "light" in track.title.lower()

@@ -15,6 +15,18 @@ class MusicLibrary:
     def export_library(self):
         self.storage.save_library(self.tracks)
 
+    def summarise_library(self):
+        summary = {}
+        artists = [track.artist for track in self.tracks]
+        for artist in artists:
+            try:
+                summary[artist]
+            except:
+                summary[artist] = 1
+            else:
+                summary[artist] += 1
+        return summary
+
     def add(self, music_track):
         self.tracks.append(music_track)
 
