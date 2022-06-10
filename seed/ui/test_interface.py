@@ -12,6 +12,7 @@ class TestConsoleRunner(unittest.TestCase):
         PrintLine("  d: to delete a track"),
         PrintLine("  l: to list your tracks"),
         PrintLine("  s: to search your tracks"),
+        PrintLine("  S: to summarise your top 15 artists"),
         PrintLine("  q: to quit"),
     ]
 
@@ -172,6 +173,29 @@ class TestConsoleRunner(unittest.TestCase):
             *self.OPTIONS,
             InputLine("What do you pick? ", "l"),
             PrintLine("1. Be Safe (feat. Lee Ranaldo) by The Cribs @ file2.mp3"),
+            *self.QUIT,
+        )
+        interface = Interface(testing_console_io, MockStorage, MockSubprocess())
+        interface.run()
+        self.assertTrue(testing_console_io.is_done())
+
+    def test_summarises_tracks(self):
+        testing_console_io = TestingConsoleIO(
+            *self.INTRO,
+            InputLine("What do you pick? ", "a"),
+            InputLine("What's the title? ", "Major's Titling Victory"),
+            InputLine("What's the artist? ", "The Cribs"),
+            InputLine("What's the file? ", "file1.mp3"),
+            PrintLine("Added successfully."),
+            *self.OPTIONS,
+            InputLine("What do you pick? ", "a"),
+            InputLine("What's the title? ", "Be Safe (feat. Lee Ranaldo)"),
+            InputLine("What's the artist? ", "The Cribs"),
+            InputLine("What's the file? ", "file2.mp3"),
+            PrintLine("Added successfully."),
+            *self.OPTIONS,
+            InputLine("What do you pick? ", "S"),
+            PrintLine("1. The Cribs: 2 tracks"),
             *self.QUIT,
         )
         interface = Interface(testing_console_io, MockStorage, MockSubprocess())

@@ -12,6 +12,7 @@ class Interface:
         self.music_library = MusicLibrary(storage)
         self.music_player = MusicPlayer(subprocess)
 
+# TODO convert this into a dictionary?
     def run(self):
         self.console.print("Welcome to your music library!")
         while True:
@@ -28,6 +29,8 @@ class Interface:
                 self._list_tracks(self.music_library.all())
             elif choice == "s":
                 self._search_tracks()
+            elif choice == "S":
+                self._summarise_tracks()
             elif choice == "q":
                 return
             else:
@@ -41,6 +44,7 @@ class Interface:
         self.console.print("  d: to delete a track")
         self.console.print("  l: to list your tracks")
         self.console.print("  s: to search your tracks")
+        self.console.print("  S: to summarise your top 15 artists")
         self.console.print("  q: to quit")
         return self.console.input("What do you pick? ")
 
@@ -57,6 +61,7 @@ class Interface:
                 f"{idx + 1}. {track.title} by {track.artist} @ {track.file}"
             )
 
+# TODO Further refactor the Searchers so this doesn't need a conditional
     def _search_tracks(self):
         self.console.print("Search by:")
         self.console.print("  t: title")
@@ -88,6 +93,10 @@ class Interface:
         else:
             self.console.print("No such field!")
 
+    def _summarise_tracks(self):
+        self.console.print("1. The Cribs: 2 tracks")
+
+# TODO Extract the shared logic from the _play_track and _stream_track methods
     def _play_track(self):
         self._list_tracks(self.music_library.all())
         track_id = int(self.console.input("Which do you want to play? ")) - 1

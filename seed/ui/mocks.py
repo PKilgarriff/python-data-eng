@@ -89,4 +89,5 @@ class MockStorage:
         self.args = None
 
     def open_library(args):
+        print(f"Open Library Args {args}")
         return []
