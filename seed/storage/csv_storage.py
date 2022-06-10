@@ -1,9 +1,11 @@
 import csv
 
+default_csv = "/Users/paul/Projects/Makers/bridge_week_01/phase_2/python-data-engineering-challenges/seed/data/tracks.csv"
+
 
 class MusicCSVStorage:
     @classmethod
-    def open_library(cls, output_class, csv_path="tracks.csv"):
+    def open_library(cls, output_class, csv_path=default_csv):
         tracks = []
         with open(csv_path) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
