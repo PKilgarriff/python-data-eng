@@ -15,6 +15,13 @@ class MusicLibrary:
     def export_library(self):
         self.storage.save_library(self.tracks)
 
+    def _sort_dict(self, dict):
+        sorted_dict = {}
+        sorted_keys = sorted(dict, key=dict.get, reverse=True)
+        for key in sorted_keys:
+            sorted_dict[key] = dict[key]
+        return sorted_dict
+
     def summarise_library(self):
         summary = {}
         artists = [track.artist for track in self.tracks]
@@ -25,7 +32,8 @@ class MusicLibrary:
                 summary[artist] = 1
             else:
                 summary[artist] += 1
-        return summary
+        descending_summary = self._sort_dict(summary)
+        return descending_summary
 
     def add(self, music_track):
         self.tracks.append(music_track)

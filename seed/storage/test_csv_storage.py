@@ -38,3 +38,4 @@ class TestMusicCSVStorage(unittest.TestCase):
         self.assertEqual(
             str(file.read()), "Trouble's Coming,Royal Blood,troubles_coming.mp3,6voIJ7OWwRabSZDC77D5Hp\n"
         )
+        file.close()
