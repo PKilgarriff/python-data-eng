@@ -9,6 +9,7 @@ class MusicCSVStorage:
         tracks = []
         with open(csv_path) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
+            next(csv_reader, None)  # Skips header row
             for row in csv_reader:
                 trimmed_row = map(lambda x: x.strip(), row)
                 tracks.append(

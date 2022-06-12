@@ -62,6 +62,7 @@ class Interface:
             )
 
 # TODO Further refactor the Searchers so this doesn't need a conditional
+# TODO Allow user to play or stream from search results
     def _search_tracks(self):
         self.console.print("Search by:")
         self.console.print("  t: title")
